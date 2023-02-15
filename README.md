@@ -1,3 +1,5 @@
+:abc: English | [:mahjong: 简体中文](./README_ZH.md)
+
 # MLflow Recipes Regression Template
 ## Table of contents
 - [Key Features](#key-features)
