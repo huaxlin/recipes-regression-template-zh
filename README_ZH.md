@@ -617,15 +617,12 @@ the train and evaluate steps.
 
 
 ### Register step
-The register step checks the `model_validation_status` output of the preceding [evaluate step](#evaluate-step) and, 
-if model validation was successful (if model_validation_status is `'VALIDATED'`), registers the model recipe created
-by the train step to the MLflow Model Registry. If the `model_validation_status` does not indicate that the model 
-passed validation checks (if model_validation_status is `'REJECTED'`), the model recipe is **not** registered to the 
-MLflow Model Registry.  
-If the model recipe is registered to the MLflow Model Registry, a `registered_model_version` is produced containing 
-the model name and the model version.
+注册步骤检查前面 [evaluate step](#evaluate-step) 的 `model_validation_status` 输出，
+如果模型验证成功（如果 model_validation_status 为 `'VALIDATED'`），则将训练步骤创建的模型recipe注册到 MLflow Model Registry。如果 `model_validation_status` 未指示模型通过了验证检查（如果 model_validation_status 为`'REJECTED'`），则模型recipe**不**注册到 MLflow Model Registry。
 
-The register step is configured by the `steps.register` section in [`recipe.yaml`](https://github.com/mlflow/recipes-regression-template/blob/main/recipe.yaml):
+如果模型recipe已注册到 MLflow Model Registry，则会生成包含模型名称和模型版本的 `registered_model_version`。
+
+注册步骤由 `steps.register` 中的 [`recipe.yaml`](https://github.com/mlflow/recipes-regression-template/blob/main/recipe.yaml) 部分配置：
 <details>
 <summary><strong><u>Full configuration reference</u></strong></summary>
 

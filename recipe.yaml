@@ -15,7 +15,7 @@
 #       请使用空格(spaces)并确保所有YAML文件格式正确。
 
 recipe: "regression/v1"
-# FIXME::REQUIRED: Specifies the target column name for model training and evaluation.
+# FIXME::REQUIRED: 指定模型训练和评估的目标列名。
 target_col: ""
 # FIXME::REQUIRED: Sets the primary metric to use to evaluate model performance. This primary
 #                  metric is used to select best performing models in MLflow UI as well as in
@@ -39,8 +39,7 @@ steps:
   transform:
     using: "custom"
     #
-    #  FIXME::OPTIONAL: Specifies the method that defines an sklearn-compatible transformer, which
-    #                   applies input feature transformation during model training and inference.
+    #  FIXME::OPTIONAL: 指定定义sklearn兼容转换器的方法，该转换器在模型训练和推理期间应用输入特征转换。
     transformer_method: transformer_fn
   train:
     #
