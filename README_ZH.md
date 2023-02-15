@@ -3,32 +3,37 @@
 # MLflow Recipes Regression Template
 ## Table of contents
 - [Key Features](#key-features)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-  - [Model Development](#model-development)
-  - [Productionization](#productionization)
+- [入门](#入门)
+  - [安装](#安装)
+  - [模型开发](#模型开发)
+  - [生产化](#生产化)
 - [Reference Guide](#reference-guide)
 
-The MLflow Regression Recipe is an [MLflow Recipe](https://mlflow.org/docs/latest/recipes.html)
-(previously known as MLflow Pipeline) for developing high-quality regression models. 
-It is designed for developing models using scikit-learn and frameworks that integrate with scikit-learn, 
-such as the `XGBRegressor` API from XGBoost.
+MLflow Regression Recipe 是 用于开发高质量回归模型的 [MLflow Recipe](https://mlflow.org/docs/latest/recipes.html)
+(以前称为 MLflow Pipelines). 
+它专为使用 scikit-learn 和与 scikit-learn 集成的框架开发模型而设计，例如XGBRegressor来自 XGBoost 的 API。
 
-This repository is a template for developing production-ready regression models with the MLflow Regression Recipe.
-It provides a recipe structure for creating models as well as pointers to configurations and code files that should
-be filled in to produce a working recipe.
+此存储库是用于使用 MLflow Regression Recipe 开发生产就绪回归模型的模板。它提供了一个用于创建模型的 recipe 结构以及指向配置和代码文件的指针，应填写这些文件以生成工作 recipe。
 
-Code developed with this template should be run with [MLflow Recipes](https://mlflow.org/docs/latest/recipes.html). 
-An example implementation of this template can be found in the [Recipe Regression Example repo](https://github.com/mlflow/recipes-examples/tree/main/regression), 
-which targets the NYC taxi dataset for its training problem.
+使用此模板开发的代码应使用
+[MLflow Recipes](https://mlflow.org/docs/latest/recipes.html)
+运行. 
+An example implementation of this template can be found in the
+可以在
+[Recipe Regression Example repo](https://github.com/mlflow/recipes-examples/tree/main/regression)
+中找到此模板的示例实现，
+它针对 NYC 出租车数据集的训练问题。
 
-**Note**: [MLflow Recipes](https://mlflow.org/docs/latest/recipes.html)
-is an experimental feature in [MLflow](https://mlflow.org).
-If you observe any issues,
-please report them [here](https://github.com/mlflow/mlflow/issues).
-For suggestions on improvements,
-please file a discussion topic [here](https://github.com/mlflow/mlflow/discussions).
-Your contribution to MLflow Recipes is greatly appreciated by the community!
+**注意**: [MLflow Recipes](https://mlflow.org/docs/latest/recipes.html)
+是
+[MLflow](https://mlflow.org)
+中的一项实验性功能。
+如果你发现任何问题，
+请在[此处](https://github.com/mlflow/mlflow/issues)报告。
+有关改进的建议，请在
+[此处](https://github.com/mlflow/mlflow/discussions)
+提交讨论主题。
+社区非常感谢您对 MLflow Recipes 的贡献！
 
 ## Key Features
 - Deterministic data splitting
@@ -38,8 +43,8 @@ Your contribution to MLflow Recipes is greatly appreciated by the community!
 - Starter code for ingest, split, transform and train steps
 - Cards containing step results, including dataset profiles, model leaderboard, performance plots and more
 
-## Getting Started
-### Installation
+## 入门
+### 安装
 To use this MLflow regression recipe,
 simply install the packages listed in the `requirements.txt` file. Note that `Python 3.8` or above is recommended.
 ```
@@ -52,7 +57,7 @@ You may need to install additional libraries for extra features:
 - [Delta](https://pypi.org/project/delta-spark/) is required to ingest Delta tables.
 These libraries are available natively in the [Databricks Runtime for Machine Learning](https://docs.databricks.com/runtime/mlruntime.html).
 
-### Model Development
+### 模型开发
 After installing MLflow Recipes, you can clone this repository to get started. Simply fill in the required values annotated by `FIXME::REQUIRED` comments in the [Recipe configuration file](https://github.com/mlflow/recipes-regression-template/blob/main/recipe.yaml) 
 and in the appropriate profile configuration: [`local.yaml`](https://github.com/mlflow/recipes-regression-template/blob/main/profiles/local.yaml) 
 (if running locally) or [`databricks.yaml`](https://github.com/mlflow/recipes-regression-template/blob/main/profiles/databricks.yaml) 
@@ -65,7 +70,7 @@ To iterate and improve your model, follow the [MLflow Recipes usage guide](https
 Note that iteration will likely involve filling in the optional `FIXME`s in the 
 step code files with your own code, in addition to the configuration keys.
 
-### Productionization
+### 生产化
 Once the model under development has reached desired quality,
 one may programatically run the adapted recipe to either reproduce the model consistently,
 or train a production model with different input data source (e.g. production dataset)
@@ -75,20 +80,22 @@ Below are recommendations for productionizing a recipe depending on its running 
 - [Databricks] Creating a new notebook (e.g. `notebooks/databricks_prod.py`),
                instantiate and run the entire recipe via `r = Recipe(profile=PROFILE); r.run()` with desired profile.
 
-## Reference Guide
-Below is a visual overview of the MLflow Regression Recipe's information flow.
+## 参考指南
+下面是 MLflow Regression Recipe 的信息流的可视化概述。
+
 <img width="710" alt="DAG" src="https://user-images.githubusercontent.com/78067366/200443468-bde64875-c3af-4e89-a36d-7b5b73297d51.png">
 
-Model develompent consists of the following sequential steps:
+模型开发包括以下顺序步骤：
 ```
 ingest -> split -> transform -> train -> evaluate -> register
 ```
 
-The batch scoring workflow consists of the following sequential steps:
+批量评分工作流由以下顺序步骤组成：
 ```
 ingest_scoring -> predict
 ```
-A detailed reference for each step follows.
+
+每个步骤的详细参考如下。
 
  * [Reference](#reference)
     + [Step artifacts](#step-artifacts)
