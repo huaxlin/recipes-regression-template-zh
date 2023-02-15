@@ -415,24 +415,23 @@ post-split 方法应该写在 `steps/split.py` 中并且应该接受三个参数
 
 ### Transform step
 
-The transform step uses the training dataset created by the split step to fit a transformer that performs the 
-user-defined transformations. The transformer is then applied to the training dataset and the validation dataset, 
-creating transformed datasets that are used by subsequent steps for estimator training and model performance evaluation.
+transform步骤使用split步骤创建的训练数据集来拟合执行用户定义转换的转换器。
+然后将转换器应用于训练数据集和验证数据集，
+创建转换后的数据集，这些数据集将被后续步骤用于估计器训练和模型性能评估。
 
-The transform step is configured by the `steps.transform` section in [`recipe.yaml`](https://github.com/mlflow/recipes-regression-template/blob/main/recipe.yaml):
-Note: The `steps.transform` section is not required. If absent, an **identity transformer** will be used.
+转换步骤由
+[`recipe.yaml`](https://github.com/mlflow/recipes-regression-template/blob/main/recipe.yaml):
+中的 `steps.transform` 部分配置： 注意：`steps.transform` 部分不是必需的。If absent, an identity transformer will be used.
 
-Below are all the possible options and full reference guide for different configurations allowed in the transform step:
+以下是transform步骤中允许的不同配置的所有可能选项和完整参考指南：
 
 <details>
 <summary><strong><u>Using: "custom"</u></strong></summary>
 
 - `transformer_method`: string. Optional.  
-The user-defined function should be written in
-[`steps/transform.py`](https://github.com/mlflow/recipes-regression-template/blob/main/steps/transform.py), 
-and should return an unfitted estimator that is sklearn-compatible; that is, the returned object should define 
-`fit()` and `transform()` methods. `steps/transform.py` contains an example placeholder function.
-The config mentions the name of the method specified in `steps/transform.py`. If absent, an identity transformer with will be used.
+用户定义的函数应该写在
+[`steps/transform.py`](https://github.com/mlflow/recipes-regression-template/blob/main/steps/transform.py)
+中，并且应该返回一个与 sklearn 兼容的未拟合估计器；也就是说，返回的对象应该定义 `fit()` 和 `transform()` 方法。 `steps/transform.py` 包含一个示例占位符函数。配置提到了在 `steps/transform.py` 中指定的方法的名称。If absent, an identity transformer with will be used.
 <u>Example</u>:
   ```
   transformer_method: transformer_fn
