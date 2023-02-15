@@ -1,10 +1,9 @@
-# `recipe.yaml` is the main configuration file for an MLflow Recipe.
-# Required recipe parameters should be defined in this file with either concrete values or
-# variables such as {{ INGEST_DATA_LOCATION }}.
+# `recipe.yaml` 是 MLflow Recipe 的主配置文件。
+# 所需的recipe参数应在此文件中使用具体值或变量（例如 {{ INGEST_DATA_LOCATION }}）定义。
 #
-# Variables must be dereferenced in a profile YAML file, located under `profiles/`.
-# See `profiles/local.yaml` for example usage. One may switch among profiles quickly by
-# providing a profile name such as `local` in the Recipe object constructor:
+# 变量必须在位于 `profiles/` 下的配置文件YAML文件中间接引用(be dereferenced)。
+# 有关示例用法，参见 `profiles/local.yaml` 。
+# 通过在Recipe对象构造函数中提供诸如 `local` 之类的配置文件名称，可以快速切换配置文件：
 # `r = Recipe(profile="local")`
 #
 # NOTE: All "FIXME::REQUIRED" fields in recipe.yaml and profiles/*.yaml must be set correctly
@@ -12,8 +11,8 @@
 #       under the root directory of this recipe, type on a unix-like command line:
 #       $> grep "# FIXME::REQUIRED:" recipe.yaml profiles/*.yaml
 #
-# NOTE: YAML does not support tabs for indentation. Please use spaces and ensure that all YAML
-#       files are properly formatted.
+# NOTE: YAML不支持用于缩进的制表符(tabs)。
+#       请使用空格(spaces)并确保所有YAML文件格式正确。
 
 recipe: "regression/v1"
 # FIXME::REQUIRED: Specifies the target column name for model training and evaluation.

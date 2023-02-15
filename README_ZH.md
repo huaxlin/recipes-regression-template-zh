@@ -231,9 +231,9 @@ steps:
 <summary><strong><u>Using: "custom"</u></strong></summary>
 
 - `location`: string. Required.  
-Dataset locations on the local filesystem are supported, as 
-well as HTTP(S) URLs and any other remote locations [resolvable by MLflow](https://mlflow.org/docs/latest/tracking.html#artifact-stores).
-One may specify multiple data locations by a list of locations as long as they have the same data format (see example below)
+支持本地文件系统上的数据集位置，以及 HTTP(S) URL 和
+[MLflow 可解析](https://mlflow.org/docs/latest/tracking.html#artifact-stores)
+的任何其他远程位置。可以通过位置列表指定多个数据位置，只要它们具有相同的数据格式（参见下面的示例）
 <u>Examples</u>:
   ```
   location: ./data/sample.csv
@@ -282,37 +282,35 @@ def read_csv_as_dataframe(location: str) -> DataFrame:
 
 ### Split step
 
-The split step splits the ingested dataset produced by the ingest step into:
-- a training dataset for model training
-- a validation dataset for model performance evaluation & tuning, and 
-- a test dataset for model performance evaluation.  
+拆分步骤将摄取步骤生成的摄取数据集拆分为：
+- 用于模型训练的训练数据集
+- 用于模型性能评估和调整的验证数据集，以及
+- 用于模型性能评估的测试数据集。 
 
-Subsequent steps use these datasets to develop a model and measure its performance.
+后续步骤使用这些数据集来开发模型并衡量其性能。
 
-The post-split method should be written in `steps/split.py` and should accept three parameters:
+post-split 方法应该写在 `steps/split.py` 中并且应该接受三个参数：
 - `train_df`: DataFrame. The unprocessed train dataset.
 - `validation_df`: DataFrame. The unprocessed validation dataset.
 - `test_df`: DataFrame. The unprocessed test dataset.
 
-It should return a triple representing the processed train, validation and test datasets. `steps/split.py` contains an example placeholder function.
+它应该返回一个代表处理过的训练、验证和测试数据集的三元组。 `steps/split.py` 包含一个示例占位符函数。
 
-The split step is configured by the `steps.split` section in `recipe.yaml` as follows:
+拆分步骤由 `recipe.yaml` 中的 `steps.split` 部分配置，如下所示：
 
 <details>
 <summary><strong><u>Using: "custom"</u></strong></summary>
 
-- `split_method`: string. Required. The user-defined split function should be written in steps/split.py, 
-and should return a Series with each element to be either 'TRAINING', 'VALIDATION' or 'TEST' indicating
-whether each  row should should be part of which split. 
+- `split_method`: string. Required. 
+用户定义的 split 函数应该写在 `steps/split.py` 中，并且应该返回一个 Series，其中每个元素是 'TRAINING'、'VALIDATION' 或 'TEST'，指示每一行是否应该是哪个split的一部分。
 <u>Example</u>:
   ```
   split_method: custom_split
   ```
 
 - `post_split_filter_method`: string. Optional.
-Name of the method specified in `steps/split.py` used to "post-process" the split datasets.  
-This procedure is meant for removing/filtering records, or other cleaning processes. Arbitrary data transformations 
-should be done in the transform step.  
+`steps/split.py` 中指定的用于 "post-process" 拆分数据集的方法的名称。  
+此过程用于删除/过滤记录或其他清理过程。应在transform step中完成任意数据转换。
 <u>Example</u>:
   ```
   post_split_filter_method: create_dataset_filter
@@ -366,19 +364,18 @@ should be done in the transform step.
 <details>
 <summary><strong><u>Using: "split_ratios"</u></strong></summary>
 
-- `split_ratios`: list. Optional.
-The fraction of records allocated to each dataset is defined by the `split_ratios` attribute of the `split` step
-definition in [`recipe.yaml`](https://github.com/mlflow/recipes-regression-template/blob/main/recipe.yaml)
-specifying the ratios by which to split the dataset into training, validation and test sets.  
+- `split_ratios`: list. Optional. 
+分配给每个数据集的记录比例由
+[`recipe.yaml`](https://github.com/mlflow/recipes-regression-template/blob/main/recipe.yaml)
+中 `split` 步骤定义的 `split_ratios` 属性定义，指定将数据集拆分为训练集、验证集和测试集的比率。
 <u>Example</u>: 
   ```
   split_ratios: [0.75, 0.125, 0.125] # Defaults to this ratio if unspecified
   ```
 
 - `post_split_filter_method`: string. Optional.
-Name of the method specified in `steps/split.py` used to "post-process" the split datasets.  
-This procedure is meant for removing/filtering records, or other cleaning processes. Arbitrary data transformations 
-should be done in the transform step.  
+`steps/split.py` 中指定的用于 "post-process" 拆分数据集的方法的名称。   
+此过程用于删除/过滤记录或其他清理过程。应在 transform step 中完成任意数据转换。
 <u>Example</u>:
   ```
   post_split_filter_method: create_dataset_filter
